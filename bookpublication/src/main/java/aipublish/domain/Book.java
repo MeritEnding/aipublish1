@@ -28,7 +28,8 @@ public class Book {
     private String content;
 
     private String summary;
-
+    
+    @Column(length = 1000) 
     private String coverImageUrl;
 
     private String category;
@@ -78,6 +79,7 @@ public class Book {
     
     // 메타데이터 업데이트
     public void updateBookMetadata(UpdateBookMetadataCommand command) {
+        System.out.println(">>> [updateBookMetadata] called with: " + command);
         this.summary = command.getSummary();
         this.coverImageUrl = command.getCoverImageUrl();
         this.category = command.getCategory();

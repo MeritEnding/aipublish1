@@ -76,6 +76,11 @@ WriterServiceClient writerServiceClient;
     @PostMapping("/books/updatemetadata")
     public Book updateBookMetadata(@RequestBody UpdateBookMetadataCommand command) {
         System.out.println("##### /books/updatemetadata called #####");
+        System.out.println(">>> 받은 값: bookId=" + command.getBookId());
+        System.out.println(">>> summary=" + command.getSummary());
+        System.out.println(">>> coverImageUrl=" + command.getCoverImageUrl());
+        System.out.println(">>> category=" + command.getCategory());
+        System.out.println(">>> price=" + command.getPrice());
 
         Optional<Book> optionalBook = bookRepository.findById(command.getBookId());
         if (optionalBook.isPresent()) {

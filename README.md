@@ -17,7 +17,9 @@
 - **main은 직접 수정 금지**
 - 반드시 `frontend` or `backend`에서 **개인 브랜치 생성 후 작업**
 - 작업 전 항상 `pull` 먼저 받아오기
+
 `git pull origin [브랜치]`
+
 
 ## **Pull Request(PR) 생성 규칙**
 
