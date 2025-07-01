@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 @EnableBinding(KafkaProcessor.class)
-@EnableFeignClients
+@EnableFeignClients(basePackages = "aipublish.external")
 public class BookpublicationApplication {
 
     public static ApplicationContext applicationContext;

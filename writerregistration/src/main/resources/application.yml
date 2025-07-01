@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: writerregistration
+
+external:
+  user-service:
+    url: https://8083-meritending-aipublish1-uhq7q346trw.ws-us120.gitpod.io
+
 ---
 
 spring:
@@ -80,5 +85,4 @@ spring:
         event-out:
           destination: aipublish
           contentType: application/json
-
 

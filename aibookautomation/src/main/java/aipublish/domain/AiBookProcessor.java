@@ -1,89 +1,32 @@
 package aipublish.domain;
 
-import aipublish.AibookautomationApplication;
+import lombok.*;
 import javax.persistence.*;
-import java.util.List;
-import lombok.Data;
-import java.util.Date;
-import java.time.LocalDate;
-import java.util.Map;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Collections;
-
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name="AiBookProcessor_table")
 @Data
-
-//<<< DDD / Aggregate Root
-public class AiBookProcessor  {
-
+@NoArgsConstructor
+@AllArgsConstructor
+public class AiBookProcessor {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-private Long processorId;    
-    
-    
-private Long bookId;    
-    
-    
-private String summary;    
-    
-    
-private String coverImageUrl;    
-    
-    
-private String category;    
-    
-    
-private Integer price;    
-    
-    
-private String processStatus;    
-    
-    
-private Date createdAt;    
-    
-    @Embedded
-private ManuscriptId manuscriptId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    private Long bookId;         // 외부(책)와 매핑용
+    private String title;
+    @Column(length = 3000) 
+    private String content;
 
-    public static AiBookProcessorRepository repository(){
-        AiBookProcessorRepository aiBookProcessorRepository = AibookautomationApplication.applicationContext.getBean(AiBookProcessorRepository.class);
-        return aiBookProcessorRepository;
-    }
+    // AI 처리 결과
+    @Lob
+    private String summary;
 
+    @Column(length = 3000)          //url 주소 길이 확장
+    private String coverImageUrl;
+    private String category;
+    private Integer price;
 
-
-//<<< Clean Arch / Port Method
-    public void startAiPublishing(StartAiPublishingCommand startAiPublishingCommand){
-        
-        //implement business logic here:
-        
-
-
-        AiPublishingCompleted aiPublishingCompleted = new AiPublishingCompleted(this);
-        aiPublishingCompleted.publishAfterCommit();
-    }
-//>>> Clean Arch / Port Method
-//<<< Clean Arch / Port Method
-    public void updateBookMetadata(UpdateBookMetadataCommand updateBookMetadataCommand){
-        
-        //implement business logic here:
-        
-
-        aipublish.external.BookQuery bookQuery = new aipublish.external.BookQuery();
-        // bookQuery.set??()        
-          = AiBookProcessorApplication.applicationContext
-            .getBean(aipublish.external.Service.class)
-            .book(bookQuery);
-
-    }
-//>>> Clean Arch / Port Method
-
-
-
+    private String processStatus;   // READY/PROCESSING/COMPLETE/FAILED
+    private LocalDateTime createdAt;
 }
-//>>> DDD / Aggregate Root
