@@ -2,6 +2,8 @@ package aipublish.domain;
 
 import aipublish.SubscriptionandpointApplication;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
@@ -18,7 +20,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userId;
+    private Long id;
 
     private String name;
 
@@ -30,8 +32,8 @@ public class User {
 
     private Boolean subscription;
 
-    @Embedded
-    private PointId pointId;
+    @JsonProperty("isAdmin")
+    private Boolean isAdmin;
 
     public static UserRepository repository() {
         UserRepository userRepository = SubscriptionandpointApplication.applicationContext.getBean(
@@ -42,10 +44,22 @@ public class User {
 
     //<<< Clean Arch / Port Method
     public void registerUser(RegisterUserCommand registerUserCommand) {
-        //implement business logic here:
+        this.name = registerUserCommand.getName();
+    this.email = registerUserCommand.getEmail();
+    this.passwordHash = registerUserCommand.getPasswordHash();
+    this.isKtCustomer = registerUserCommand.getIsKtCustomer();
+    this.subscription = registerUserCommand.getSubscription() != null ? registerUserCommand.getSubscription() : false;
+    this.isAdmin = registerUserCommand.getIsAdmin() != null ? registerUserCommand.getIsAdmin() : false;
+    }
 
-        UserRegistered userRegistered = new UserRegistered(this);
-        userRegistered.publishAfterCommit();
+    @JsonIgnore
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    @JsonIgnore
+    public Boolean isAdmin() {
+        return Boolean.TRUE.equals(isAdmin);
     }
 
     //>>> Clean Arch / Port Method
@@ -55,8 +69,6 @@ public class User {
     ) {
         //implement business logic here:
 
-        WelcomePointGranted welcomePointGranted = new WelcomePointGranted(this);
-        welcomePointGranted.publishAfterCommit();
     }
     //>>> Clean Arch / Port Method
 

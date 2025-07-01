@@ -15,8 +15,7 @@ public class UserRegistered extends AbstractEvent {
     private String name;
     private String email;
     private Boolean isKtCustomer;
-    private Date createdAt;
-
+    
     public UserRegistered(User aggregate) {
         super(aggregate);
     }

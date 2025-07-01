@@ -2,23 +2,23 @@ package aipublish.infra;
 
 import aipublish.config.kafka.KafkaProcessor;
 import aipublish.domain.*;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javax.naming.NameParser;
-import javax.naming.NameParser;
+import aipublish.service.AiBookProcessorService;
+import java.time.LocalDateTime;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-//<<< Clean Arch / Inbound Adaptor
 @Service
 @Transactional
 public class PolicyHandler {
 
     @Autowired
     AiBookProcessorRepository aiBookProcessorRepository;
+
+    @Autowired
+    AiBookProcessorService aiBookProcessorService;
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {}
@@ -28,23 +28,28 @@ public class PolicyHandler {
         condition = "headers['type']=='BookSubmittedEvent'"
     )
     public void wheneverBookSubmittedEvent_TriggerAiPublishingOnBookSubmit(
-        @Payload BookSubmittedEvent bookSubmittedEvent
+        @Payload BookSubmittedEvent event
     ) {
-        BookSubmittedEvent event = bookSubmittedEvent;
         System.out.println(
-            "\n\n##### listener TriggerAiPublishingOnBookSubmit : " +
-            bookSubmittedEvent +
-            "\n\n"
+            "\n\n##### listener TriggerAiPublishingOnBookSubmit : " + event + "\n\n"
         );
 
-        // Comments //
-        //작가가 출간 요청을 제출하면 AI 자동화 프로세스를 시작하여 요약, 표지 생성, 포맷 변환, 카테고리 분류, 요금 산정 등 일련의 자동화 작업을 수행하기 위함입니다.
+        // 1. AI Processor 엔티티 생성 및 저장
+        AiBookProcessor processor = new AiBookProcessor();
+        processor.setBookId(event.getBookId());
+        processor.setTitle(event.getTitle());
+        processor.setContent(event.getContent());
+        processor.setProcessStatus("READY");
+        processor.setCreatedAt(LocalDateTime.now());
 
-        // Sample Logic //
+        aiBookProcessorRepository.save(processor);
 
-        StartAiPublishingCommand command = new StartAiPublishingCommand();
-        //command.setBookId("???");
-        AiBookProcessor.startAiPublishing(command);
+        // 2. Service 통해 자동화 처리 실행
+        try {
+            aiBookProcessorService.process(processor.getId());
+        } catch (Exception e) {
+            System.out.println("AI 자동화 처리 실패: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
-//>>> Clean Arch / Inbound Adaptor
