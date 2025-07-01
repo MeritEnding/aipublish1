@@ -59,6 +59,13 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 8080,
+     proxy: {
+      
+      '/users': {
+        target: 'https://8083-meritending-aipublish1-3cqyn2r47t6.ws-us120.gitpod.io', // User 서비스의 실제 주소로 변경하세요.
+        changeOrigin: true, // Host 헤더를 타겟 URL의 것으로 변경
+      }
+    }
   },
   css: {
     preprocessorOptions: {
