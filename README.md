@@ -179,3 +179,103 @@ sudo ./aws/install
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/eksctl /usr/local/bin
 ```
+
+
+#  API 명세서
+
+> Notion 링크 기반 DTO 불러오기 방식 사용  
+> DTO 작성 위치: [[DTO(데이터 전달 객체)]]  
+> 사용 시: `[[DTO_이름]]`
+
+---
+
+##  사용자 관련
+
+| 기능 | Method | URL | Request DTO | Response DTO | 비고 |
+|------|--------|-----|--------------|---------------|------|
+| 회원가입 | POST | `/users/registeruser` | [[RegisterUserCommand]] | [[UserResponse]] | |
+| 로그인 | POST | `/users/login` | [[LoginUserCommand]] | [[UserResponse]] | |
+| 포인트 잔액 조회 | GET | `/users/{id}/point` | - | [[PointResponse]] | |
+| 포인트 구매 | POST | `/points/grant` | [[GrantPointCommand]] | [[PointResponse]] | |
+| 마이페이지 조회 | GET | `/users/{id}/views` | - | - | |
+| 구매 도서 목록 조회 | GET | `/books/purchased?userId={userId}` | - | [[PurchasedBookDTO]] | 제목, 표지 포함 |
+
+---
+
+##  구독 관련
+
+| 기능 | Method | URL | Request DTO | Response DTO | 비고 |
+|------|--------|-----|--------------|---------------|------|
+| 구독 활성화 | POST | `/subscriptions/activate?userId={userId}` | - | - | |
+| 구독 비활성화 | POST | `/subscriptions/deactivate?userId={userId}` | - | - | |
+
+---
+
+##  작가 관련
+
+| 기능 | Method | URL | Request DTO | Response DTO | 비고 |
+|------|--------|-----|--------------|---------------|------|
+| 작가 등록 요청 | POST | `/writers/apply` | [[ApplyWriterRegistrationCommand]] | [[WriterCandidate]] | |
+| 작가 여부 확인 (내부) | GET | `/writers/{userId}/isApproved` | - | Boolean | |
+
+---
+
+##  도서 관련
+
+| 기능 | Method | URL | Request DTO | Response DTO | 비고 |
+|------|--------|-----|--------------|---------------|------|
+| 도서 저장/임시저장 | POST | `/books/savebookcommand` | [[SaveBookCommand]] | [[Book]] | status = DRAFT |
+| 출간 요청 | POST | `/books/submitbookcommand` | [[SubmitBookCommand]] | [[Book]] | status = SUBMITTED |
+| 출간 완료 도서 조회 | GET | `/books?status=PUBLISHED` | - | [[Book]] | |
+| 베스트셀러 조회 | GET | `/books/bestsellers` | - | [[Book]] | viewCount ≥ 5 |
+| 도서 상세 조회 | GET | `/books/{id}?userId={userId}` | - | [[Book]] | viewCount 증가, 자동 구매 처리 |
+| 도서 삭제 (관리자) | DELETE | `/books/{id}?userId={userId}` | - | - | |
+| 전체 도서 목록 (사용 X) | GET | `/books` | - | [[Book]] | |
+| 메타데이터 업데이트 (내부) | POST | `/books/updatemetadata` | [[UpdateBookMetadataCommand]] | [[Book]] | status = PUBLISHED |
+
+---
+
+##  관리자 기능
+
+| 기능 | Method | URL | Request DTO | Response DTO | 비고 |
+|------|--------|-----|--------------|---------------|------|
+| 작가 요청 리스트 조회 | GET | `/admin/writers?adminId={userId}` | - | [[WriterCandidate]] | |
+| 작가 승인/반려 | PATCH | `/admin/writers/{writerId}/status?adminId={userId}` | [[ChangeWriterStatusCommand]] | [[WriterCandidate]] | |
+
+---
+
+##  포인트 관련 (내부)
+
+| 기능 | Method | URL | Request DTO | Response DTO | 비고 |
+|------|--------|-----|--------------|---------------|------|
+| 포인트 차감 | POST | `/points/deduct` | - | - | 내부 로직 전용 |
+
+---
+
+##  AI 도서 자동화 관련 (내부)
+
+| 기능 | Method | URL | Request DTO | Response DTO | 비고 |
+|------|--------|-----|--------------|---------------|------|
+| AI 도서 등록 | POST | `/aiBookProcessors` | [[AiBookProcessor]] | [[AiBookProcessor]] | status = READY |
+| AI 출간 시작 | POST | `/aiBookProcessors/{id}/startaipublishing` | - | [[AiBookProcessor]] | status = COMPLETE, 메타+표지 자동 생성 |
+| AI 메타데이터 수정 | POST | `/aiBookProcessors/{id}/updatebookmetadata` | [[UpdateBookMetadataCommand]] | [[AiBookProcessor]] | |
+| AI 출간 도서 상세 조회 | GET | `/aiBookProcessors/{id}` | - | [[AiBookProcessor]] | |
+
+---
+
+##  API 테스트 예시 (httpie)
+
+```bash
+# 회원 등록
+http :8088/users/registeruser userId="user1" name="홍길동" email="hong@email.com"
+
+# 포인트 지급
+http :8088/points/grant userId="user1" pointId="p1" balance="1000"
+
+# 도서 저장
+http :8088/books/savebookcommand bookId="b1" userId="user1" title="제목" status="DRAFT"
+
+# AI 도서 등록
+http :8088/aiBookProcessors processorId="proc1" bookId="b1" summary="요약" ...
+
+
