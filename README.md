@@ -1,6 +1,6 @@
-# 실행 방법
+# 1. 실행 방법
 
-## - 배포된 사이트 실행 방법
+#  배포된 사이트 실행 방법
 [걷다가 서재 사이트](http://20.249.104.162/)
 
 - 로그인
@@ -20,8 +20,10 @@
 - 회원가입(구독자)
 - 도서 열람할 때 구독자면 포인트 감소하지 않는 거 확인
 - 관리자 일 때 도서 삭제 할 수 있는지 확인
+
+---
  
-## - 배포 전 코드 실행 방법
+# 배포 전 코드 실행 방법
 
 ## 1. 기본설정
 
@@ -144,7 +146,8 @@ frontend1
 yarn start
 
 
-## - 배포 방법
+---
+# 배포 방법
 
 # 🚀 프로젝트 배포 가이드 (Azure AKS + ACR)
 
@@ -279,8 +282,6 @@ kubectl get all
 AI 서비스 관련 설정
  OpenAI Secret 확인 및 생성
 
-복사
-편집
 # openai-secret 존재 여부 확인
 kubectl get secret openai-secret
 
@@ -289,24 +290,21 @@ kubectl create secret generic openai-secret \
   --from-literal=OPENAI_API_KEY=sk-xxxxxx
 AI 서비스 재시작
 
-복사
-편집
+
 kubectl rollout restart deploy aibookautomation
  마무리
 배포가 완료되면 아래 명령으로 정상 동작 여부를 계속 확인하세요:
 
 
-복사
-편집
 kubectl get pods
 kubectl logs <pod-name>
 
 
+---
 
 
 
-
-# Github 협업 규칙
+# 2. Github 협업 규칙
 
 ## 브랜치
 
@@ -488,7 +486,8 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 sudo mv /tmp/eksctl /usr/local/bin
 ```
 ---
-#  요구사항 정의서
+
+# 3. 요구사항 정의서
 
 ---
 
@@ -616,7 +615,7 @@ sudo mv /tmp/eksctl /usr/local/bin
 
 
 ---
-#  API 명세서
+# 4. API 명세서
 
 > Notion 링크 기반 DTO 불러오기 방식 사용  
 > DTO 작성 위치: [[DTO(데이터 전달 객체)]]  
