@@ -180,7 +180,7 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 sudo mv /tmp/eksctl /usr/local/bin
 ```
 
-
+---
 #  API 명세서
 
 > Notion 링크 기반 DTO 불러오기 방식 사용  
@@ -278,4 +278,4 @@ http :8088/books/savebookcommand bookId="b1" userId="user1" title="제목" statu
 # AI 도서 등록
 http :8088/aiBookProcessors processorId="proc1" bookId="b1" summary="요약" ...
 
-
+---
