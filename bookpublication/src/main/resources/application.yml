@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: bookpublication
+
+external:
+  user-service:
+    url: http://subscriptionandpoint:8080
+  writer-service:
+    url: http://writerregistration:8080
 ---
 
 spring:
@@ -39,6 +45,11 @@ spring:
           destination: aipublish
 #>>> EDA / Topic Name
           contentType: application/json
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 logging:
   level:
@@ -80,5 +91,9 @@ spring:
         event-out:
           destination: aipublish
           contentType: application/json
-
-
+          
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

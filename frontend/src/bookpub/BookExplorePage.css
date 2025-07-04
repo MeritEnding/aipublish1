@@ -1,0 +1,156 @@
+/* BookExplorePage.css */
+
+/* --- 페이지 전역 스타일 --- */
+:root {
+  /* 도서관 테마 색상 팔레트 */
+  --theme-primary: #192a56; /* 딥 네이비 */
+  --theme-secondary: #c8a46e; /* 앤틱 골드 */
+  --theme-bg: #f9f6f2; /* 부드러운 베이지 배경 */
+  --theme-surface: #ffffff; /* 카드 등 표면 색상 */
+  --theme-text-dark: #2f3542; /* 어두운 텍스트 */
+  --theme-text-light: #7f8c8d; /* 밝은 텍스트 */
+  --theme-border: #e8e6e3;
+
+  /* 클래식한 느낌을 위한 세리프 폰트 */
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+}
+
+.book-explore-page-wrapper {
+  background-color: var(--theme-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-explore-main-content {
+  flex-grow: 1;
+  padding: 3rem 1rem;
+}
+
+.book-explore-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  background-color: var(--theme-surface);
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* --- 페이지 제목 및 로딩/오류 --- */
+.explore-title {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 500;
+  text-align: center;
+  color: var(--theme-primary);
+  margin-bottom: 2.5rem;
+}
+
+.loading-spinner, .error-message {
+  /* 다른 페이지와 스타일 통일 */
+}
+
+/* --- 탭 네비게이션 --- */
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid var(--theme-border);
+  margin-bottom: 2rem;
+  gap: 1rem; /* 탭 사이 간격 */
+}
+
+.tab-button {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: none;
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--theme-text-light);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+  border-bottom: 3px solid transparent; /* 비활성 탭 밑줄 */
+}
+
+.tab-button:hover {
+  color: var(--theme-primary);
+}
+
+.tab-button.active {
+  color: var(--theme-primary);
+  border-bottom-color: var(--theme-primary); /* 활성 탭 밑줄 강조 */
+}
+
+/* --- 탭 콘텐츠 및 섹션 --- */
+.tab-content {
+  padding-top: 1rem;
+}
+
+.section-subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--theme-text-dark);
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+/* --- 도서 그리드 및 메시지 --- */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+/* BookCard에 적용될 호버 효과 (Home.css와 일관성 유지) */
+.book-grid > * {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-grid > *:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.no-books-message {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--theme-text-light);
+  padding: 4rem 2rem;
+  background-color: rgba(0,0,0,0.02);
+  border-radius: 8px;
+  border: 1px dashed var(--theme-border);
+}
+
+
+/* --- 반응형 디자인 --- */
+@media (max-width: 768px) {
+  .explore-title {
+    font-size: 2.2rem;
+  }
+  .book-explore-container {
+    padding: 2rem;
+  }
+  .tab-navigation {
+    gap: 0.5rem;
+    justify-content: flex-start; /* 모바일에선 왼쪽 정렬 */
+    overflow-x: auto; /* 탭이 많을 경우 스크롤 */
+  }
+  .tab-button {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    flex-shrink: 0; /* 탭 버튼이 줄어들지 않도록 */
+  }
+  .book-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .book-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}

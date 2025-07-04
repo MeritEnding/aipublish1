@@ -1,0 +1,59 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: aipublish-vs
+  namespace: default
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - aipublish-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /writers
+        - uri:
+            prefix: /admin
+        - uri:
+            prefix: /writer-candidates
+      route:
+        - destination:
+            host: writerregistration
+            port:
+              number: 8080
+    - match:
+        - uri:
+            prefix: /users
+        - uri:
+            prefix: /points
+        - uri:
+            prefix: /subscriptions
+      route:
+        - destination:
+            host: subscriptionandpoint
+            port:
+              number: 8080
+    - match:
+        - uri:
+            prefix: /books
+      route:
+        - destination:
+            host: bookpublication
+            port:
+              number: 8080
+    - match:
+        - uri:
+            prefix: /aiBookProcessors
+      route:
+        - destination:
+            host: aibookautomation
+            port:
+              number: 8080
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: frontend
+            port:
+              number: 80

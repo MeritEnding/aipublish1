@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class BookDetailsQuery {
 
-    private Long manuscriptId;
+    private Long bookId;
     private String title;
     private Long userId;
     private String content;

@@ -1,0 +1,178 @@
+/* WriterManagementPage.css */
+
+/* --- 페이지 전역 스타일 및 테마 --- */
+:root {
+  /* 일관된 사이트 테마 유지 */
+  --theme-primary: #192a56;
+  --theme-success: #28a745;
+  --theme-danger: #e74c3c;
+  --theme-warning: #ffc107;
+  --theme-bg: #f9f6f2;
+  --theme-surface: #ffffff;
+  --theme-surface-alt: #f8f9fa; /* 테이블 헤더, 짝수 행 배경 */
+  --theme-text-dark: #2f3542;
+  --theme-text-light: #7f8c8d;
+  --theme-border: #e8e6e3;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-sans: 'Noto Sans KR', sans-serif;
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.management-page-wrapper {
+  background-color: var(--theme-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.management-main-content {
+  flex-grow: 1;
+  padding: 3rem 1rem;
+}
+
+/* --- 관리 페이지 컨테이너 --- */
+.management-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  background-color: var(--theme-surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+.management-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--theme-text-dark);
+  margin-bottom: 2.5rem;
+}
+
+/* --- 데이터 없음 메시지 --- */
+.no-data-message {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--theme-text-light);
+  padding: 4rem 2rem;
+  background-color: var(--theme-surface-alt);
+  border-radius: 8px;
+  border: 1px dashed var(--theme-border);
+}
+
+/* --- 작가 관리 테이블 --- */
+.writers-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  overflow-x: auto; /* 모바일에서 수평 스크롤 */
+  display: block; /* overflow-x를 위해 block으로 변경 */
+}
+
+.writers-table thead {
+  background-color: var(--theme-surface-alt);
+}
+
+.writers-table th,
+.writers-table td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  vertical-align: middle;
+  white-space: nowrap; /* 셀 내용이 줄바꿈되지 않도록 */
+}
+
+.writers-table th {
+  font-weight: 600;
+  color: var(--theme-text-dark);
+  border-bottom: 2px solid var(--theme-border);
+}
+
+.writers-table tbody tr {
+  border-bottom: 1px solid var(--theme-border);
+  transition: background-color 0.2s ease;
+}
+
+/* 짝수 행 배경색 (Zebra-striping) */
+.writers-table tbody tr:nth-of-type(even) {
+  background-color: var(--theme-surface-alt);
+}
+
+.writers-table tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+/* 소개글이 길 경우 처리 */
+.writers-table td:nth-child(4) { /* 4번째 열(소개글) */
+  white-space: normal;
+  min-width: 250px;
+}
+
+/* --- 상태 배지 --- */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--theme-surface);
+  text-transform: uppercase;
+}
+.status-badge.pending { background-color: var(--theme-warning); color: var(--theme-text-dark); }
+.status-badge.approved { background-color: var(--theme-success); }
+.status-badge.rejected { background-color: var(--theme-danger); }
+
+
+/* --- 액션 버튼 --- */
+.writers-table td:last-child {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  color: var(--theme-surface);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.action-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.action-button.approve-button {
+  background-color: var(--theme-success);
+}
+.action-button.approve-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.action-button.reject-button {
+  background-color: var(--theme-danger);
+}
+.action-button.reject-button:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.action-button:disabled {
+  background-color: var(--theme-text-light);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+
+/* --- 반응형 디자인 --- */
+/* 테이블 자체에 수평 스크롤을 적용했기 때문에, 
+   컨테이너의 패딩을 줄이는 것 외에 복잡한 미디어 쿼리는 불필요합니다. */
+@media (max-width: 768px) {
+  .management-container {
+    padding: 1.5rem;
+  }
+  .management-title {
+    font-size: 2rem;
+  }
+}

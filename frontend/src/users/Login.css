@@ -1,0 +1,137 @@
+/* Login.css */
+
+/* --- 전역 스타일 및 테마 변수 (일관성 유지) --- */
+:root {
+  --theme-primary: #192a56;
+  --theme-danger: #e74c3c;
+  --theme-bg: #f9f6f2;
+  --theme-surface: #ffffff;
+  --theme-text-dark: #2f3542;
+  --theme-text-light: #7f8c8d;
+  --theme-border: #ced4da;
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-sans: 'Noto Sans KR', sans-serif;
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 페이지 전체 래퍼 --- */
+.auth-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--theme-bg);
+  padding: 2rem;
+  font-family: var(--font-sans);
+}
+
+/* --- 로그인 폼 컨테이너 --- */
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem;
+  background-color: var(--theme-surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+
+/* --- 제목 스타일 --- */
+.auth-title {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 500;
+  color: var(--theme-text-dark);
+  margin: 0 auto 2.5rem;
+}
+
+/* --- 폼 그룹 및 라벨 --- */
+.auth-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--theme-text-dark);
+  margin-bottom: 0.5rem;
+}
+
+/* --- 입력 필드 --- */
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--theme-border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 3px rgba(25, 42, 86, 0.1);
+}
+
+/* --- 오류 메시지 --- */
+.error-message {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--theme-danger);
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* --- 제출 버튼 --- */
+.submit-button {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--theme-surface);
+  background-color: var(--theme-primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 0.5rem;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #111e3c;
+  transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+  background-color: var(--theme-text-light);
+  cursor: not-allowed;
+}
+
+/* --- 하단 링크 (회원가입 등) --- */
+.auth-footer {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--theme-text-light);
+}
+
+.auth-footer p {
+  margin: 0.5rem 0;
+}
+
+.auth-link {
+  color: var(--theme-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: text-decoration 0.3s;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}

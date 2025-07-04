@@ -1,0 +1,196 @@
+/* src/pages/AdminSignupPage.css */
+
+/* Login.css 또는 Signup.css에서 사용된 공통 스타일 변수들을 여기에 다시 정의합니다. */
+:root {
+  --primary-color: #1a73e8;
+  --accent-color: #e8f0fe;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --bg-light: #f8f9fa;
+  --border-color: #eee;
+  --error-color: #f44336;
+}
+
+.auth-page-wrapper { /* Login.css와 동일 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.admin-signup-container { /* signup-container와 유사 */
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.auth-title { /* Login.css와 동일 */
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px; /* 설명 텍스트를 위해 약간 줄임 */
+}
+
+.admin-signup-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.auth-form { /* Login.css와 동일 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group { /* Login.css와 동일 */
+  text-align: left;
+}
+
+.form-group label { /* Login.css와 동일 */
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.form-group input { /* Login.css와 동일 */
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus { /* Login.css와 동일 */
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2);
+  outline: none;
+}
+
+.checkbox-group { /* Signup.css와 동일 */
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+}
+
+.checkbox-group label {
+  cursor: pointer;
+  margin-bottom: 0;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+
+.submit-button { /* Login.css와 동일 */
+  background-color: var(--primary-color);
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.submit-button:hover:not(:disabled) { /* Login.css와 동일 */
+  background-color: #1565c0;
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled { /* Login.css와 동일 */
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message { /* Login.css와 동일 */
+  color: var(--error-color);
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.auth-footer { /* Login.css와 동일 */
+  margin-top: 25px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.auth-footer p { /* Login.css와 동일 */
+  margin-bottom: 10px;
+}
+
+.auth-link { /* Login.css와 동일 */
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.auth-link:hover { /* Login.css와 동일 */
+  color: #1565c0;
+  text-decoration: underline;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 600px) {
+  .admin-signup-container {
+    padding: 30px 20px;
+  }
+  .auth-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px; /* 모바일에서 간격 줄임 */
+  }
+  .admin-signup-description {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+  .submit-button {
+    font-size: 1rem;
+    padding: 12px 15px;
+  }
+}
