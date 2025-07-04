@@ -149,11 +149,11 @@ yarn start
 ---
 # 배포 방법
 
-# 🚀 프로젝트 배포 가이드 (Azure AKS + ACR)
+#  프로젝트 배포 가이드 (Azure AKS + ACR)
 
 ---
 
-## 📂 브랜치 Pull 및 .env 설정
+##  브랜치 Pull 및 .env 설정
 
 ```bash
 # 본인 배포용 브랜치 생성 및 pull
@@ -163,13 +163,13 @@ git pull origin deploy/gyuhee
 # 루트 경로에 .env 파일 생성
 echo "OPENAI_API_KEY=sk-xxxxx" > .env
 
-# ☁️ Azure Cloud Setup (AKS, ACR)
+# ☁ Azure Cloud Setup (AKS, ACR)
 
 이 문서는 Azure 포털을 통해 AKS (Azure Kubernetes Service) 클러스터 및 ACR (Azure Container Registry) 설정 과정을 안내합니다.
 
 ---
 
-## 1️⃣ 구독(Subscription) 확인
+## 1️ 구독(Subscription) 확인
 
 1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
 2. 상단 검색창에 **`구독`** 또는 **`Subscription`** 을 입력하고 선택합니다.
@@ -177,7 +177,7 @@ echo "OPENAI_API_KEY=sk-xxxxx" > .env
 
 ---
 
-## 2️⃣ 리소스 그룹 생성
+## 2️ 리소스 그룹 생성
 
 1. Azure 포털 상단 검색창에 **`리소스 그룹`** 입력 후 선택합니다.
 2. **`만들기`** 버튼을 클릭합니다.
@@ -191,7 +191,7 @@ echo "OPENAI_API_KEY=sk-xxxxx" > .env
 
 ---
 
-## 3️⃣ AKS 클러스터 생성
+## 3️ AKS 클러스터 생성
 
 1. 상단 검색창에 **`Kubernetes`** 입력 후 선택합니다.
 2. **`만들기` > `Kubernetes 클러스터`** 선택
@@ -207,7 +207,7 @@ echo "OPENAI_API_KEY=sk-xxxxx" > .env
 
 ---
 
-### 📌 Agent Pool 설정
+###  Agent Pool 설정
 
 1. **`노드 풀`** 탭으로 이동
 2. 기본 생성된 `agentpool` 클릭
@@ -224,16 +224,16 @@ echo "OPENAI_API_KEY=sk-xxxxx" > .env
 
 ---
 
-## ✅ 완료 확인
+##  완료 확인
 
 - 우측 상단의 **🔔 알림 아이콘** 클릭하여 **클러스터 생성 완료 여부** 확인
 - 클러스터 생성 후, Azure CLI 또는 포털을 통해 클러스터에 연결 가능
 
 ---
 
-📌 다음 단계로는 [kubectl 설정](https://learn.microsoft.com/ko-kr/azure/aks/kubernetes-walkthrough#connect-to-the-cluster) 및 Docker 이미지 배포, Helm, Kafka 설정이 필요합니다.
+ 다음 단계로는 [kubectl 설정](https://learn.microsoft.com/ko-kr/azure/aks/kubernetes-walkthrough#connect-to-the-cluster) 및 Docker 이미지 배포, Helm, Kafka 설정이 필요합니다.
 
-## 🧰 Azure CLI & Helm 설치
+##  Azure CLI & Helm 설치
 
 ```bash
 # Azure CLI 설치
