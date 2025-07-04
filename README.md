@@ -1,3 +1,134 @@
+# 실행 방법
+
+## 1. 배포 전 코드 실행 방법
+
+## 1. 기본설정
+
+https://gitpod.io/#https://github.com/MeritEnding/aipublish1.git 접속
+
+다음 명령어를 차례대로 수행
+
+git fetch
+
+git reset —hard
+
+git clean -fd
+
+git checkout -b release origin/release
+
+sdk install java
+
+./init.sh
+
+다른 터미널 열고
+
+cd infra
+
+docker compose up -d
+
+각 서버 다 실행 시키기
+
+cd aibookautomation
+
+mvn spring-boot:run
+
+cd bookpublication
+
+mvn spring-boot:run
+
+cd gateway
+
+mvn spring-boot:run
+
+cd subscritpionandpoint
+
+mvn spring-boot:run
+
+cd writerregistration
+
+mvn spring-boot:run
+
+cd frontend1
+
+cd aipub
+
+npm install -g yarn
+
+yarn install
+
+yarn start
+
+## 2. 깃포드 바뀐거 설정
+
+깃포드는 실행할때마다 자기 페이지로 바뀝니다.. 서버 실행했으면 그 뜬 것을 복붙하는 과정입니다.
+
+![image.png](attachment:7995c26f-3766-46a4-bda4-ac8f7ddfa5a0:image.png)
+
+gateway
+
+![image.png](attachment:a704c80a-d616-454f-9d32-f54844bdc753:image.png)
+
+aibookautomain: api 넣기, 경로 설정
+
+![image.png](attachment:da8e16b6-d983-4582-b5a8-908ecc8a998a:image.png)
+
+bookpublication: 경로설정
+
+![image.png](attachment:7937614a-5f1a-440d-ad22-56c2ce4b96bd:image.png)
+
+subscriptionandpoint 바꿀것없음
+
+writerregistration: 경로설정
+
+![image.png](attachment:2bd49a61-b370-4078-bd3d-46c80e65770e:image.png)
+
+frontend1
+
+pakage.json: 프록시 경로를 새로운 게이트웨이 경로
+
+![image.png](attachment:dce70362-f7a6-4e2e-b36f-abc8f2ddbaa8:image.png)
+
+1. 서버 재실행
+
+각 서버 다 실행 시키기
+
+aibookautomation
+
+mvn spring-boot:run
+
+bookpublication
+
+mvn spring-boot:run
+
+gateway
+
+mvn spring-boot:run
+
+subscritpionandpoint
+
+mvn spring-boot:run
+
+writerregistration
+
+mvn spring-boot:run
+
+frontend1
+
+yarn start
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
 # Github 협업 규칙
 
 ## 브랜치
