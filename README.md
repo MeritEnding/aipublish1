@@ -1,6 +1,10 @@
 # 실행 방법
 
-## 1. 배포 전 코드 실행 방법
+## 1. 배포된 사이트 실행 방법
+[걷다가 서재 사이트](http://20.249.104.162/)
+
+
+## 2. 배포 전 코드 실행 방법
 
 ## 1. 기본설정
 
@@ -62,31 +66,37 @@ yarn start
 
 깃포드는 실행할때마다 자기 페이지로 바뀝니다.. 서버 실행했으면 그 뜬 것을 복붙하는 과정입니다.
 
-![image.png](attachment:7995c26f-3766-46a4-bda4-ac8f7ddfa5a0:image.png)
+![image](https://github.com/user-attachments/assets/08307ba2-2472-4c54-977b-a018c5dfd7cd)
+
 
 gateway
 
-![image.png](attachment:a704c80a-d616-454f-9d32-f54844bdc753:image.png)
+![image](https://github.com/user-attachments/assets/3c6b08f2-dea3-40b1-a3aa-38d62b7512f0)
+
 
 aibookautomain: api 넣기, 경로 설정
 
-![image.png](attachment:da8e16b6-d983-4582-b5a8-908ecc8a998a:image.png)
+![image](https://github.com/user-attachments/assets/12b7a46f-0ae7-4595-a749-6cb164d88dd1)
+
 
 bookpublication: 경로설정
 
-![image.png](attachment:7937614a-5f1a-440d-ad22-56c2ce4b96bd:image.png)
+![image](https://github.com/user-attachments/assets/4796a6d3-e9e6-4016-9d7e-227666e61eb8)
+
 
 subscriptionandpoint 바꿀것없음
 
 writerregistration: 경로설정
 
-![image.png](attachment:2bd49a61-b370-4078-bd3d-46c80e65770e:image.png)
+![image](https://github.com/user-attachments/assets/3afa94b8-6a36-480a-83f4-0269f04d70f5)
+
 
 frontend1
 
 pakage.json: 프록시 경로를 새로운 게이트웨이 경로
 
-![image.png](attachment:dce70362-f7a6-4e2e-b36f-abc8f2ddbaa8:image.png)
+![image](https://github.com/user-attachments/assets/e69888b2-faa4-48cc-b9c9-a04c71d6a803)
+
 
 1. 서버 재실행
 
@@ -117,7 +127,7 @@ frontend1
 yarn start
 
 
-
+## 3. 배포 방법
 
 
 
