@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: writerregistration
+
+external:
+  user-service:
+    url: http://subscriptionandpoint:8080
+
 ---
 
 spring:
@@ -30,21 +35,22 @@ spring:
       bindings:
         event-in:
           group: writerregistration
-#<<< EDA / Topic Name
           destination: aipublish
-#>>> EDA / Topic Name
           contentType: application/json
         event-out:
-#<<< EDA / Topic Name
           destination: aipublish
-#>>> EDA / Topic Name
           contentType: application/json
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 logging:
   level:
     org.hibernate.type: trace
     org.springframework.cloud: debug
-
 
 server:
   port: 8082
@@ -81,4 +87,8 @@ spring:
           destination: aipublish
           contentType: application/json
 
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

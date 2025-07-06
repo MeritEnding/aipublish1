@@ -4,6 +4,15 @@ server:
 spring:
   application:
     name: aibookautomation
+
+openai:
+  api-key: ${OPENAI_API_KEY}
+  endpoint: "https://api.openai.com/v1/chat/completions"
+
+external:
+  book-service:
+    url: http://bookpublication:8080
+
 ---
 
 spring:
@@ -39,6 +48,12 @@ spring:
           destination: aipublish
 #>>> EDA / Topic Name
           contentType: application/json
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 logging:
   level:
@@ -84,9 +99,13 @@ spring:
         event-out:
           destination: aipublish
           contentType: application/json
+          
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 api:
   url: 
     aibookautomation: aibookautomation:8080 
-    
-

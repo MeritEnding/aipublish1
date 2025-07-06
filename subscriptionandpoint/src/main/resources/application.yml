@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: subscriptionandpoint
+
 ---
 
 spring:
@@ -80,5 +81,3 @@ spring:
         event-out:
           destination: aipublish
           contentType: application/json
-
-

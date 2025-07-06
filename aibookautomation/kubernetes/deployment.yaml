@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: aibookautomation
-          image: "username/aibookautomation:latest"
+          image: "illilili/aipub-ai:latest"
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -35,3 +35,9 @@ spec:
             timeoutSeconds: 2
             periodSeconds: 5
             failureThreshold: 5
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: openai-secret
+                  key: OPENAI_API_KEY
