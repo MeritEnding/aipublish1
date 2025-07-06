@@ -312,6 +312,7 @@ kubectl logs <pod-name>
 | --- | --- |
 | `main` | 최종 배포, 확정된 코드만 올라감 |
 | `master` | 배포 기준, 확정된 코드만 올라감 |
+| `release`| 배포 해보기 |
 | `develop`| 벡엔드 프론트앤드 연동 |
 | `frontend` | 프론트엔드 개발 공통 브랜치 |
 | `backend` | 백엔드 개발 공통 브랜치 |

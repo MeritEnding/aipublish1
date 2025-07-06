@@ -10,39 +10,15 @@ import {
         <VerticalNavSectionTitle :item="{ heading: '작가 등록/관리' }" />
         <VerticalNavLink
             :item="{
-                title: '작가 ',
-                to: '/writes',
-            }"
-        />
-        <VerticalNavLink
-            :item="{
-                title: '작가 목록',
-                to: '/writerLists',
-            }"
-        />
-        <VerticalNavLink
-            :item="{
-                title: '작가 상세',
-                to: '/writerDetails',
+                title: '작가등록',
+                to: '/writers/apply',
             }"
         />
         <VerticalNavSectionTitle :item="{ heading: '회원 관리' }" />
         <VerticalNavLink
             :item="{
-                title: '사용자',
-                to: '/users',
-            }"
-        />
-        <VerticalNavLink
-            :item="{
-                title: '포인트',
-                to: '/points',
-            }"
-        />
-        <VerticalNavLink
-            :item="{
-                title: '포인트 잔액 조회',
-                to: '/pointBalances',
+                title: '관리자',
+                to: '/admin/writer_management',
             }"
         />
         <VerticalNavLink
@@ -71,5 +47,22 @@ import {
                 to: '/aiBookProcessors',
             }"
         />
+        <VerticalNavSectionTitle :item="{ heading: '도서관리' }" />
+        <VerticalNavLink
+            :item="{
+                title: '도서 관리',
+                to: '/book_mangement',
+            }"
+        />
+        <VerticalNavSectionTitle :item="{ heading: '요금제' }" />
+        <VerticalNavLink
+            :item="{
+                title: '요금제',
+                to: '/billing',
+            }"
+        />
+
+
+        
     </ul>
 </template>

@@ -7,40 +7,42 @@ spring:
   profiles: default
   cloud:
     gateway:
-#<<< API Gateway / Routes
+      # ✅ [필수 추가] HTTP 요청의 최대 크기를 10MB로 늘립니다.
+      httpclient:
+        max-request-size: 10485760 # 10 * 1024 * 1024
+
       routes:
         - id: writerregistration
-          uri: http://localhost:8082
+          uri: https://8082-meritending-aipublish1-pzmecvcb8t5.ws-us120.gitpod.io
           predicates:
-            - Path=/writes/**, /writerLists/**, /writerDetails/**
+            # ✅ [필수 추가] /admin/** 과 /writer-candidates/** 경로를 추가합니다.
+            - Path=/writers/**, /admin/**, /writer-candidates/**
         - id: subscriptionandpoint
-          uri: http://localhost:8083
+          uri: https://8083-meritending-aipublish1-pzmecvcb8t5.ws-us120.gitpod.io
           predicates:
-            - Path=/users/**, /points/**, /pointBalances/**, /viewMyPages/**
+            # ✅ [필수 추가] /subscriptions/** 경로를 추가합니다.
+            - Path=/users/**, /points/**, /subscriptions/**
         - id: bookpublication
-          uri: http://localhost:8084
+          uri: https://8084-meritending-aipublish1-pzmecvcb8t5.ws-us120.gitpod.io
           predicates:
-            - Path=/books/**, /bookDetails/**
+            - Path=/books/**
         - id: aibookautomation
-          uri: http://localhost:8085
+          uri: https://8085-meritending-aipublish1-pzmecvcb8t5.ws-us120.gitpod.io
           predicates:
-            - Path=/aiBookProcessors/**, 
+            - Path=/aiBookProcessors/**
         - id: frontend
-          uri: http://localhost:8080
+          uri: https://3000-meritending-aipublish1-pzmecvcb8t5.ws-us120.gitpod.io
           predicates:
             - Path=/**
-#>>> API Gateway / Routes
+      
+      # CORS 설정은 그대로 유지합니다.
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins:
-              - "*"
-            allowedMethods:
-              - "*"
-            allowedHeaders:
-              - "*"
+            allowedOrigins: ["*"]
+            allowedMethods: ["*"]
+            allowedHeaders: ["*"]
             allowCredentials: true
-
 
 ---
 

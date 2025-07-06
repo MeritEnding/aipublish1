@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: writerregistration
+
+# 각자 경로에 맞게 수정
+external:
+  user-service:
+    url: https://8083-meritending-aipublish1-pzmecvcb8t5.ws-us120.gitpod.io
 ---
 
 spring:
@@ -80,5 +85,4 @@ spring:
         event-out:
           destination: aipublish
           contentType: application/json
-
 

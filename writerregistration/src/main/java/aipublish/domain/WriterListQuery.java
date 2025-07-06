@@ -10,6 +10,4 @@ public class WriterListQuery {
     private String name;
     private String status;
     private Date createdAt;
-    private String status;
-    private Date createdAt;
 }

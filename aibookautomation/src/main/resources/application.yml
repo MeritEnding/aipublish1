@@ -4,6 +4,16 @@ server:
 spring:
   application:
     name: aibookautomation
+
+openai:
+  api-key: "api키 넣기"
+  endpoint: "https://api.openai.com/v1/chat/completions"
+
+# 각자 경로에 맞게 수정
+external:
+  book-service:
+    url: https://8084-meritending-aipublish1-pzmecvcb8t5.ws-us120.gitpod.io
+
 ---
 
 spring:
@@ -88,5 +98,3 @@ spring:
 api:
   url: 
     aibookautomation: aibookautomation:8080 
-    
-

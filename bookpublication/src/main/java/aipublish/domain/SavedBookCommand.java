@@ -22,7 +22,7 @@ public class SavedBookCommand extends AbstractEvent {
     private String status;
     private Integer viewCount;
     private Date createdAt;
-    private AiBookProcessorId aiBookProcessorId;
+    // private AiBookProcessorId aiBookProcessorId;
 
     public SavedBookCommand(Book aggregate) {
         super(aggregate);

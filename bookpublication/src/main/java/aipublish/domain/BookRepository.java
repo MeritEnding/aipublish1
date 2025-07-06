@@ -11,13 +11,20 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 //<<< PoEAA / Repository
 @RepositoryRestResource(collectionResourceRel = "books", path = "books")
 public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
-    @Query(
-        value = "select book " +
-        "from Book book " +
-        "where(:manuscriptId is null or book.manuscriptId = :manuscriptId) and (:title is null or book.title like %:title%) and (:userId is null or book.userId = :userId) and (:content is null or book.content like %:content%) and (:summary is null or book.summary like %:summary%) and (:coverImageUrl is null or book.coverImageUrl like %:coverImageUrl%) and (:category is null or book.category like %:category%) and (:price is null or book.price = :price) and (:status is null or book.status like %:status%) and (:viewCount is null or book.viewCount = :viewCount) and (:createdAt is null or book.createdAt = :createdAt)"
-    )
+    @Query("SELECT book FROM Book book " +
+        "WHERE (:bookId IS NULL OR book.bookId = :bookId) AND " +
+        "(:title IS NULL OR book.title LIKE %:title%) AND " +
+        "(:userId IS NULL OR book.userId = :userId) AND " +
+        "(:content IS NULL OR book.content LIKE %:content%) AND " +
+        "(:summary IS NULL OR book.summary LIKE %:summary%) AND " +
+        "(:coverImageUrl IS NULL OR book.coverImageUrl LIKE %:coverImageUrl%) AND " +
+        "(:category IS NULL OR book.category LIKE %:category%) AND " +
+        "(:price IS NULL OR book.price = :price) AND " +
+        "(:status IS NULL OR book.status LIKE %:status%) AND " +
+        "(:viewCount IS NULL OR book.viewCount = :viewCount) AND " +
+        "(:createdAt IS NULL OR book.createdAt = :createdAt)")
     Book bookDetails(
-        Long manuscriptId,
+        Long bookId,
         String title,
         Long userId,
         String content,
@@ -29,4 +36,11 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
         Integer viewCount,
         Date createdAt
     );
+    
+    List<Book> findByStatus(String status);
+    // 조회수 5 이상 도서 리스트 (베스트셀러)
+    @Query("SELECT b FROM Book b WHERE b.viewCount >= 5")
+    List<Book> findBestsellers();
+
+    
 }

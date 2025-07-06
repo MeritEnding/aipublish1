@@ -19,7 +19,9 @@ export default defineConfig({
         configFile: 'src/styles/variables/_vuetify.scss',
       },
     }),
-    Pages({}),
+    Pages({
+      dirs: 'src/components/pages',
+    }),
     Layouts(),
     Components({
       dirs: ['src/@core/components', 'src/components'],
@@ -59,6 +61,19 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 8080,
+    proxy: {
+
+      '/users':   { target: 'https://8088-meritending-aipublish1-n2cryifyy61.ws-us120.gitpod.io', changeOrigin: true },
+      '/writers': { target: 'https://8088-meritending-aipublish1-n2cryifyy61.ws-us120.gitpod.io', changeOrigin: true },
+      '/admin':   { target: 'https://8088-meritending-aipublish1-n2cryifyy61.ws-us120.gitpod.io', changeOrigin: true },
+      '/books':   { target: 'https://8088-meritending-aipublish1-n2cryifyy61.ws-us120.gitpod.io', changeOrigin: true },
+      '/points':  { target: 'https://8088-meritending-aipublish1-n2cryifyy61.ws-us120.gitpod.io', changeOrigin: true },
+      '/subscriptions': { target: 'https://8088-meritending-aipublish1-n2cryifyy61.ws-us120.gitpod.io', changeOrigin: true },
+      '/aiBookProcessors': { target: 'https://8088-meritending-aipublish1-n2cryifyy61.ws-us120.gitpod.io', changeOrigin: true },
+      '/writer-candidates': { target: 'https://8088-meritending-aipublish1-n2cryifyy61.ws-us120.gitpod.io', changeOrigin: true },
+      
+    }
+    
   },
   css: {
     preprocessorOptions: {
