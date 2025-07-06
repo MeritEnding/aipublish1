@@ -4,6 +4,18 @@ server:
 spring:
   application:
     name: bookpublication
+
+# 각자 경로에 맞게 수정
+external:
+  user-service:
+    url: https://8083-meritending-aipublish1-lsxqilz0e0m.ws-us120.gitpod.io
+  writer-service:
+    url: https://8082-meritending-aipublish1-lsxqilz0e0m.ws-us120.gitpod.io
+  book-service:
+    url: https://8084-meritending-aipublish1-lsxqilz0e0m.ws-us120.gitpod.io
+  ai-service:
+    url: https://8085-meritending-aipublish1-lsxqilz0e0m.ws-us120.gitpod.io
+
 ---
 
 spring:
@@ -80,5 +92,4 @@ spring:
         event-out:
           destination: aipublish
           contentType: application/json
-
 

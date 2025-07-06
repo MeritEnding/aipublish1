@@ -11,4 +11,6 @@ public class RegisterUserCommand {
     private String email;
     private String passwordHash;
     private Boolean isKtCustomer;
+    private Boolean subscription;
+    private Boolean isAdmin; // 관리자 여부 추가
 }

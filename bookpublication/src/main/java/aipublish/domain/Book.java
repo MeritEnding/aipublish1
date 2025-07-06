@@ -1,6 +1,7 @@
 package aipublish.domain;
 
 import aipublish.BookpublicationApplication;
+import aipublish.domain.BookMetadataUpdated;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -27,7 +28,8 @@ public class Book {
     private String content;
 
     private String summary;
-
+    
+    @Column(length = 1000) 
     private String coverImageUrl;
 
     private String category;
@@ -40,8 +42,8 @@ public class Book {
 
     private Date createdAt;
 
-    @Embedded
-    private AiBookProcessorId aiBookProcessorId;
+    // @Embedded
+    // private AiBookProcessorId aiBookProcessorId;
 
     public static BookRepository repository() {
         BookRepository bookRepository = BookpublicationApplication.applicationContext.getBean(
@@ -53,26 +55,41 @@ public class Book {
     public void SubmitManuscript() {
         //
     }
-
-    //<<< Clean Arch / Port Method
+    // 출간 요청
     public void submitBookCommand(
-        SubmitBookCommandCommand submitBookCommandCommand
+        SubmitBookCommand submitBookCommandCommand
     ) {
-        //implement business logic here:
-
-        BookSubmittedEvent bookSubmittedEvent = new BookSubmittedEvent(this);
-        bookSubmittedEvent.publishAfterCommit();
+        this.status = "SUBMITTED"; // 상태 변경
+        BookSubmittedEvent event = new BookSubmittedEvent(this);
+        event.publishAfterCommit(); // 출간 요청 이벤트 발행
     }
 
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
-    public void saveBookCommand(SaveBookCommandCommand saveBookCommandCommand) {
-        //implement business logic here:
+    // 도서 저장
+    public void saveBookCommand(SaveBookCommand saveBookCommand) {
+        this.userId = saveBookCommand.getUserId();
+        this.title = saveBookCommand.getTitle();
+        this.content = saveBookCommand.getContent();
+        this.status = "DRAFT";
+        this.viewCount = 0;
+        this.createdAt = new Date();
 
-        SavedBookCommand savedBookCommand = new SavedBookCommand(this);
-        savedBookCommand.publishAfterCommit();
-    }
-    //>>> Clean Arch / Port Method
+        SavedBookCommand event = new SavedBookCommand(this);
+        event.publishAfterCommit();
+        }
+    
+    // 메타데이터 업데이트
+    public void updateBookMetadata(UpdateBookMetadataCommand command) {
+        System.out.println(">>> [updateBookMetadata] called with: " + command);
+        this.summary = command.getSummary();
+        this.coverImageUrl = command.getCoverImageUrl();
+        this.category = command.getCategory();
+        this.price = command.getPrice();
+        this.status = "PUBLISHED";
+        this.createdAt = new Date();
+
+        BookMetadataUpdated event = new BookMetadataUpdated(this);
+        event.publishAfterCommit();
+}
 
 }
 //>>> DDD / Aggregate Root

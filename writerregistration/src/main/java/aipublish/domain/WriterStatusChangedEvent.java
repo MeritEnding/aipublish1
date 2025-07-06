@@ -1,12 +1,10 @@
+// WriterStatusChangedEvent.java
+
 package aipublish.domain;
 
-import aipublish.domain.*;
 import aipublish.infra.AbstractEvent;
-import java.time.LocalDate;
-import java.util.*;
 import lombok.*;
 
-//<<< DDD / Domain Event
 @Data
 @ToString
 public class WriterStatusChangedEvent extends AbstractEvent {
@@ -17,12 +15,20 @@ public class WriterStatusChangedEvent extends AbstractEvent {
     private String bio;
     private String status;
 
-    public WriterStatusChangedEvent(Write aggregate) {
+    public WriterStatusChangedEvent(WriterCandidate aggregate) {
         super(aggregate);
+        if (aggregate != null) {
+            this.userId = aggregate.getUserId();
+            this.name = aggregate.getName();
+            this.email = aggregate.getEmail();
+            this.bio = aggregate.getBio();
+            if (aggregate.getStatus() != null) {
+                this.status = aggregate.getStatus().toString();
+            }
+        }
     }
 
     public WriterStatusChangedEvent() {
         super();
     }
 }
-//>>> DDD / Domain Event

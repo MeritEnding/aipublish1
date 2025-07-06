@@ -24,22 +24,17 @@ public class PolicyHandler {
     PointRepository pointRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void whatever(@Payload String eventString) {}
+    public void wheneverUserRegistered_GrantWelcomePoint(@Payload UserRegistered event) {
+        if (!event.validate()) return;
 
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='PointDeducted'"
-    )
-    public void wheneverPointDeducted_UpdatePurchaseList(
-        @Payload PointDeducted pointDeducted
-    ) {
-        PointDeducted event = pointDeducted;
-        System.out.println(
-            "\n\n##### listener UpdatePurchaseList : " + pointDeducted + "\n\n"
+        System.out.println("##### listener UserRegistered - granting welcome point : " + event.toJson());
+
+        Point point = new Point();
+        point.grantWelcomePoint(
+            event.getUserId(),
+            event.getIsKtCustomer() ? 5000 : 1000
         );
-
-        // Sample Logic //
-        Point.updatePurchaseList(event);
+        pointRepository.save(point);
     }
 }
 //>>> Clean Arch / Inbound Adaptor
